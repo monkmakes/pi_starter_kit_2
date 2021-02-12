@@ -7,9 +7,14 @@ import time, math
 
 p = PiAnalog()
 
+multiplier = 2000 # increase to make more sensitive
+
 def light_from_r(R):
-    # Log the reading to compress the range
-    return math.log(1000000.0/R) * 10.0 
+    light = 1/math.sqrt(R) * multiplier
+    if light > 100:
+        light = 100
+    # Sqareroot the reading to compress the range
+    return light
 
 # group together all of the GUI code
 # Update the reading
